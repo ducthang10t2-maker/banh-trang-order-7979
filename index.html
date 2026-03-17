@@ -4,88 +4,164 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Bánh Tráng Order 🥢</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary: #e8472a;
-  --orange:  #f97316;
-  --cream:   #fffbf5;
+  --cream:   #faf4e6;
+  --cream2:  #f2ead6;
+  --orange:  #e84500;
+  --orange2: #f97316;
+  --text:    #1a0a00;
+  --muted:   #8a7060;
+  --border:  #e0cdb0;
   --card:    #ffffff;
-  --brown:   #7c3d12;
-  --text:    #1c0a00;
-  --muted:   #9a7860;
-  --border:  #fde8d0;
-  --shadow:  0 2px 16px rgba(231,71,42,.10);
-  --radius:  18px;
+  --radius:  14px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   background: var(--cream);
   color: var(--text);
   min-height: 100vh;
   padding-bottom: 120px;
 }
 
-/* HERO */
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky; top: 0; z-index: 90;
+  background: var(--cream);
+  border-bottom: 2px solid var(--border);
+  padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 58px;
+}
+.nav-logo {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.3rem; font-weight: 900;
+  color: var(--orange); letter-spacing: .5px; line-height: 1;
+}
+.nav-logo span { color: var(--text); }
+.nav-links {
+  display: flex; gap: 22px; list-style: none;
+}
+.nav-links a {
+  font-size: 11px; font-weight: 800;
+  color: var(--muted); text-decoration: none;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--orange); }
+@media(max-width:480px){ .nav-links { display: none; } }
+
+/* ── HERO ── */
 .hero {
-  position: relative;
-  width: 100%;
-  min-height: 260px;
-  background: linear-gradient(160deg,#7c3d12 0%,#e8472a 55%,#f97316 100%);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 40px 20px 52px;
-  text-align: center; overflow: hidden;
+  padding: 36px 20px 28px;
+  max-width: 680px; margin: 0 auto;
 }
-.hero-badge {
-  display: inline-block;
-  background: rgba(255,255,255,.18);
-  color: #fff; font-size: 11px; font-weight: 800;
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange); color: #fff;
+  font-size: 10px; font-weight: 800;
   letter-spacing: 2px; text-transform: uppercase;
-  padding: 5px 14px; border-radius: 30px; margin-bottom: 12px;
+  padding: 6px 14px; border-radius: 30px; margin-bottom: 20px;
 }
-.hero h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2rem,8vw,3.4rem);
-  color: #fff; line-height: 1.1;
-  text-shadow: 0 2px 20px rgba(0,0,0,.2);
+.hero-title {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 900;
+  font-size: clamp(4rem, 19vw, 8rem);
+  line-height: 1.0; color: var(--orange);
+  letter-spacing: -2px;
 }
-.hero p { color: rgba(255,255,255,.85); font-size: 14px; margin-top: 8px; font-weight: 700; }
-.hero-wave {
-  position: absolute; bottom: -1px; left: 0; right: 0;
-  height: 40px; background: var(--cream);
-  clip-path: ellipse(55% 100% at 50% 100%);
+.hero-title .line2 {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--text);
+}
+.hero-sub {
+  margin-top: 22px;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+}
+.hero-tag {
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  border: 1.5px solid var(--border); border-radius: 30px;
+  padding: 5px 12px; background: #fff;
 }
 
-/* CONTAINER */
-.wrap { max-width: 680px; margin: 0 auto; padding: 0 12px; }
-
-/* SECTION HEAD */
-.sec-head { display: flex; align-items: center; gap: 10px; margin: 26px 0 14px; }
-.sec-icon {
-  width: 42px; height: 42px; background: var(--border);
-  border-radius: 12px; display: flex; align-items: center;
-  justify-content: center; font-size: 20px; flex-shrink: 0;
+/* ── TICKER ── */
+.ticker-wrap {
+  overflow: hidden;
+  background: var(--orange);
+  padding: 11px 0; margin: 32px 0 0;
 }
-.sec-head h2 { font-family:'Fraunces',serif; font-size:1.15rem; color:var(--brown); }
-.sec-head small { font-size:11px; color:var(--muted); font-weight:600; display:block; margin-top:2px; }
+.ticker-track {
+  display: flex; width: max-content;
+  animation: ticker 20s linear infinite;
+}
+.ticker-item {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .85rem; font-weight: 800;
+  color: #fff; letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 0 24px; white-space: nowrap;
+}
+.ticker-item::after { content: '✦'; margin-left: 24px; opacity: .5; font-size: .6rem; }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
-/* GRID */
-.grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-@media(max-width:380px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+/* ── WRAP ── */
+.wrap { max-width: 680px; margin: 0 auto; padding: 0 16px; }
 
-/* CARD */
+/* ── SECTION TITLE ── */
+.sec-title {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 9vw, 3.6rem);
+  color: var(--orange); letter-spacing: -1px;
+  margin: 40px 0 4px; line-height: 1.05;
+}
+.sec-title small {
+  display: block;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--muted); letter-spacing: 1px;
+  text-transform: uppercase; margin-top: 4px;
+}
+
+/* ── DIVIDER ── */
+.dv {
+  display: flex; align-items: center; gap: 12px;
+  margin: 18px 0 14px;
+}
+.dv::before, .dv::after {
+  content: ''; flex: 1; height: 1.5px; background: var(--border);
+}
+.dv span {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .75rem; font-weight: 800;
+  color: var(--orange); letter-spacing: 2.5px;
+  text-transform: uppercase; white-space: nowrap;
+}
+
+/* ── GRID ── */
+.grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+@media(max-width:380px){ .grid{ grid-template-columns: repeat(2,1fr); } }
+
+/* ── CARD ── */
 .card {
-  background: var(--card); border-radius: var(--radius);
-  overflow: hidden; box-shadow: var(--shadow);
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
   border: 1.5px solid var(--border);
   transition: transform .2s, box-shadow .2s;
+  box-shadow: 2px 3px 0 var(--border);
 }
-.card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(231,71,42,.15); }
+.card:hover { transform: translateY(-3px); box-shadow: 4px 7px 0 var(--border); }
 .card-img {
-  width: 100%; padding-top: 90%; position: relative;
-  background: linear-gradient(135deg,#fde8d0,#fef3e2); overflow: hidden;
+  width: 100%; padding-top: 85%; position: relative;
+  background: var(--cream2); overflow: hidden;
 }
 .card-img img {
   position: absolute; inset: 0;
@@ -94,104 +170,114 @@ body {
 .card-ph {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 4px;
+  align-items: center; justify-content: center; gap: 6px;
 }
-.card-ph .em { font-size: 30px; }
-.card-ph .ht { font-size: 9px; color: var(--muted); text-align: center; padding: 0 6px; }
+.card-ph .em { font-size: 26px; }
+.card-ph .ht { font-size: 9px; color: var(--muted); text-align: center; padding: 0 6px; font-weight: 700; }
 .tag {
   position: absolute; top: 7px; left: 7px;
-  font-size: 9px; font-weight: 900;
-  padding: 3px 7px; border-radius: 20px; letter-spacing: .3px;
+  font-size: 9px; font-weight: 800;
+  padding: 4px 8px; border-radius: 20px; letter-spacing: .3px;
+  display: inline-flex; align-items: center; gap: 4px;
 }
 .t-ot    { background: #fee2e2; color: #991b1b; }
 .t-chanh { background: #fef9c3; color: #854d0e; }
 .t-mayo  { background: #f0fdf4; color: #166534; }
+.t-me    { background: #fef3c7; color: #92400e; }
 
-.card-body { padding: 9px 9px 11px; }
-.card-name { font-size: 11.5px; font-weight: 800; line-height: 1.3; min-height: 30px; }
-.card-price { font-size: 13px; font-weight: 900; color: var(--primary); margin: 3px 0 7px; }
+.card-body { padding: 10px 10px 12px; }
+.card-name {
+  font-size: 11.5px; font-weight: 800; line-height: 1.4;
+  min-height: 32px; color: var(--text);
+}
+.card-price {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .95rem; font-weight: 900;
+  color: var(--orange); margin: 5px 0 8px;
+}
 
-/* STEPPER */
+/* ── STEPPER ── */
 .stepper {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center;
   border: 1.5px solid var(--border); border-radius: 30px;
-  height: 30px; background: var(--cream);
+  height: 32px; background: var(--cream);
   width: 100%;
 }
 .st-btn {
-  width: 28px; height: 28px; min-width: 28px;
+  width: 30px; height: 30px; min-width: 30px;
   background: none; border: none;
-  font-size: 16px; font-weight: 900;
-  color: var(--primary); cursor: pointer;
+  font-size: 17px; font-weight: 900;
+  color: var(--orange); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: background .15s; flex-shrink: 0;
-  border-radius: 50%;
-  line-height: 1;
+  border-radius: 50%; line-height: 1;
 }
-.st-btn:hover { background: var(--border); }
+.st-btn:hover { background: var(--cream2); }
 .st-num {
   flex: 1; text-align: center;
-  font-size: 13px; font-weight: 900;
+  font-size: 13px; font-weight: 800;
   border: none; background: none; outline: none;
-  color: var(--text); min-width: 0; width: 100%;
+  color: var(--text); min-width: 0;
 }
 .st-num::-webkit-inner-spin-button,
 .st-num::-webkit-outer-spin-button { -webkit-appearance: none; }
 .st-num { -moz-appearance: textfield; }
 
-/* DIVIDER */
-.dv {
-  display: flex; align-items: center; gap: 10px;
-  margin: 22px 0 14px;
-}
-.dv::before,.dv::after { content:''; flex:1; height:1px; background:var(--border); }
-.dv span { font-size:10px; font-weight:900; color:var(--primary); letter-spacing:1.5px; text-transform:uppercase; white-space:nowrap; }
-
-/* STICKY CART */
+/* ── STICKY CART ── */
 .cart-bar {
   position: fixed; bottom: 0; left: 0; right: 0;
-  background: #fff; border-top: 2px solid var(--border);
-  padding: 10px 14px 14px;
+  background: var(--cream);
+  border-top: 2.5px solid var(--border);
+  padding: 10px 16px 14px;
   box-shadow: 0 -4px 24px rgba(0,0,0,.08);
   z-index: 100; display: none;
 }
 .cart-bar.show { display: block; }
 .cart-inner { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
 .cart-txt { flex: 1; }
-.cart-cnt { font-size: 11px; color: var(--muted); font-weight: 700; }
-.cart-tot { font-size: 20px; font-weight: 900; color: var(--primary); }
-.btn-order {
-  background: linear-gradient(135deg,var(--primary),var(--orange));
-  color: #fff; border: none; border-radius: 14px;
-  padding: 12px 22px;
-  font-family: 'Nunito',sans-serif; font-size: 14px; font-weight: 900;
-  cursor: pointer; box-shadow: 0 4px 16px rgba(231,71,42,.35);
-  transition: transform .15s, box-shadow .15s; white-space: nowrap;
+.cart-cnt { font-size: 11px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+.cart-tot {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.6rem; color: var(--orange); letter-spacing: 1px;
 }
-.btn-order:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(231,71,42,.45); }
+.btn-order {
+  background: var(--orange);
+  color: #fff; border: none; border-radius: 12px;
+  padding: 12px 22px;
+  font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 900;
+  cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+  transition: background .15s, transform .15s; white-space: nowrap;
+  box-shadow: 3px 3px 0 #a33000;
+}
+.btn-order:hover { background: #c93d00; transform: translateY(-1px); }
 
-/* MODAL */
+/* ── MODAL ── */
 .overlay {
   display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.5); z-index: 200;
-  align-items: flex-end; backdrop-filter: blur(2px);
+  background: rgba(26,10,0,.55); z-index: 200;
+  align-items: flex-end; backdrop-filter: blur(3px);
 }
 .overlay.show { display: flex; }
 .modal {
-  background: #fff; border-radius: 24px 24px 0 0;
+  background: var(--cream); border-radius: 24px 24px 0 0;
   width: 100%; max-width: 680px; margin: 0 auto;
   max-height: 92vh; overflow-y: auto;
   padding: 20px 16px 40px;
   animation: up .3s ease;
+  border-top: 3px solid var(--orange);
 }
 @keyframes up { from{transform:translateY(100%)} to{transform:translateY(0)} }
 .modal-handle {
   width: 38px; height: 4px; background: var(--border);
   border-radius: 4px; margin: 0 auto 18px;
 }
-.modal h3 { font-family:'Fraunces',serif; font-size:1.2rem; color:var(--brown); margin-bottom:14px; }
+.modal h3 {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.8rem; color: var(--orange);
+  letter-spacing: 1px; margin-bottom: 14px;
+}
 
-/* ORDER SUMMARY */
+/* ORDER ITEMS */
 .oi {
   display: flex; justify-content: space-between; align-items: center;
   padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px;
@@ -199,77 +285,81 @@ body {
 .oi:last-child { border-bottom: none; }
 .oi-name { font-weight: 700; flex: 1; }
 .oi-qty  { color: var(--muted); margin: 0 10px; }
-.oi-price { font-weight: 900; color: var(--primary); }
+.oi-price { font-weight: 900; color: var(--orange); }
 .tot-row {
-  display: flex; justify-content: space-between;
-  padding: 12px 0 0; font-size: 16px; font-weight: 900;
-  border-top: 2px solid var(--border); margin-bottom: 18px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 12px 0 0; border-top: 2px solid var(--border); margin-bottom: 18px;
 }
-.tot-row span:last-child { color: var(--primary); }
+.tot-row span:first-child { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.tot-row span:last-child {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1.8rem; color: var(--orange); letter-spacing: 1px;
+}
 
 /* FORM */
 .fg { margin-bottom: 13px; }
 .fg label {
   display: block; font-size: 11px; font-weight: 900;
-  color: var(--brown); margin-bottom: 5px;
+  color: var(--text); margin-bottom: 5px;
   text-transform: uppercase; letter-spacing: .5px;
 }
-.req { color: var(--primary); }
+.req { color: var(--orange); }
 .fc {
   width: 100%; border: 2px solid var(--border);
-  border-radius: 12px; padding: 10px 13px;
-  font-size: 15px; font-family: 'Nunito',sans-serif;
-  color: var(--text); background: var(--cream);
+  border-radius: 10px; padding: 10px 13px;
+  font-size: 15px; font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--text); background: #fff;
   transition: border-color .2s; outline: none;
 }
-.fc:focus { border-color: var(--primary); background: #fff; }
+.fc:focus { border-color: var(--orange); }
 .rg { display: flex; flex-wrap: wrap; gap: 7px; }
 .ro { display: none; }
 .rl {
   padding: 8px 14px; border: 2px solid var(--border);
   border-radius: 30px; font-size: 13px; font-weight: 700;
   cursor: pointer; transition: all .2s;
-  background: var(--cream); user-select: none;
+  background: #fff; user-select: none;
 }
-.ro:checked + .rl { border-color: var(--primary); background: var(--primary); color: #fff; }
+.ro:checked + .rl { border-color: var(--orange); background: var(--orange); color: #fff; }
 
 /* QR */
 .qr-box {
-  background: var(--cream); border: 2px solid var(--border);
-  border-radius: 14px; padding: 14px; text-align: center; margin: 6px 0 13px;
+  background: #fff; border: 2px solid var(--border);
+  border-radius: 12px; padding: 14px; text-align: center; margin: 6px 0 13px;
 }
 .qr-ph {
-  width: 110px; height: 110px; margin: 0 auto 10px;
-  background: var(--border); border-radius: 10px;
+  width: 100px; height: 100px; margin: 0 auto 10px;
+  background: var(--cream2); border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 32px; border: 2px dashed #e2c9b0;
+  font-size: 30px; border: 2px dashed var(--border);
 }
-.bank { font-size: 12px; color: var(--text); line-height: 1.8; }
-.bank strong { color: var(--brown); }
+.bank { font-size: 12px; color: var(--text); line-height: 1.9; }
+.bank strong { color: var(--orange); }
 
 .btn-confirm {
   width: 100%; padding: 14px;
-  background: linear-gradient(135deg,var(--primary),var(--orange));
-  color: #fff; border: none; border-radius: 14px;
-  font-family: 'Nunito',sans-serif; font-size: 15px; font-weight: 900;
-  cursor: pointer; box-shadow: 0 4px 16px rgba(231,71,42,.3);
-  transition: transform .15s; margin-top: 6px;
+  background: var(--orange); color: #fff;
+  border: none; border-radius: 12px;
+  font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; font-weight: 900;
+  cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+  box-shadow: 3px 3px 0 #a33000;
+  transition: background .15s, transform .15s; margin-top: 6px;
 }
-.btn-confirm:hover { transform: translateY(-2px); }
-.btn-confirm:disabled { opacity: .6; transform: none; }
+.btn-confirm:hover { background: #c93d00; transform: translateY(-1px); }
+.btn-confirm:disabled { opacity: .5; transform: none; box-shadow: none; }
 .btn-back {
   width: 100%; padding: 11px; background: none;
-  border: 2px solid var(--border); border-radius: 14px;
-  font-family: 'Nunito',sans-serif; font-size: 13px; font-weight: 700;
-  color: var(--muted); cursor: pointer; margin-top: 7px;
+  border: 2px solid var(--border); border-radius: 12px;
+  font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--muted); cursor: pointer; margin-top: 8px;
 }
 
 /* TOAST */
 .toast {
   display: none; position: fixed; bottom: 24px; left: 50%;
   transform: translateX(-50%);
-  background: #1c0a00; color: #fff;
-  padding: 12px 22px; border-radius: 40px;
+  background: var(--text); color: #fff;
+  padding: 12px 24px; border-radius: 40px;
   font-size: 13px; font-weight: 700;
   box-shadow: 0 8px 32px rgba(0,0,0,.25);
   z-index: 999; white-space: nowrap;
@@ -283,111 +373,167 @@ body {
 </head>
 <body>
 
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">Bánh<span>Tráng</span> 🥢</div>
+  <ul class="nav-links">
+    <li><a href="#">Bánh dẻo</a></li>
+    <li><a href="#">Bánh tôm</a></li>
+    <li><a href="#" onclick="return false;">Đặt hàng</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">Order ngay · Giao tận nơi</div>
-  <h1>Bánh Tráng 🥢</h1>
-  <p>Dẻo dai & Tôm giòn · Ớt cay · Chanh dây · Mayo</p>
-  <div class="hero-wave"></div>
+  <div class="hero-eyebrow">🚚 Giao tận nơi · Order ngay</div>
+  <div class="hero-title">
+    BÁNH<br>
+    <span class="line2">TRÁNG</span>
+  </div>
+  <div class="hero-sub">
+    <span class="hero-tag">🍘 Bánh dẻo</span>
+    <span class="hero-tag">🦐 Bánh tôm</span>
+    <span class="hero-tag">🌶️ Ớt cay</span>
+    <span class="hero-tag">🍋 Chanh dây</span>
+    <span class="hero-tag">🥚 Mayo</span>
+  </div>
 </div>
 
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">ORDER NGAY</span>
+    <span class="ticker-item">DẺO DAI THƠM NGON</span>
+    <span class="ticker-item">TÔM GIÒN TAN</span>
+    <span class="ticker-item">GIAO TẬN NƠI</span>
+    <span class="ticker-item">ỚT CAY XÉ LƯỠI</span>
+    <span class="ticker-item">CHANH DÂY CHUA NGỌT</span>
+    <span class="ticker-item">ORDER NGAY</span>
+    <span class="ticker-item">DẺO DAI THƠM NGON</span>
+    <span class="ticker-item">TÔM GIÒN TAN</span>
+    <span class="ticker-item">GIAO TẬN NƠI</span>
+    <span class="ticker-item">ỚT CAY XÉ LƯỠI</span>
+    <span class="ticker-item">CHANH DÂY CHUA NGỌT</span>
+  </div>
+</div>
+
+<!-- MENU -->
 <div class="wrap">
 
-  <!-- BÁNH DẺO CHẤM -->
-  <div class="sec-head">
-    <div class="sec-icon">🍘</div>
-    <div><h2>Bánh dẻo — Chấm sốt</h2><small>Bánh nguyên miếng, chấm riêng</small></div>
-  </div>
+  <!-- BÁNH DẺO -->
+  <div class="sec-title">BÁNH DẺO<small>Bánh nguyên miếng · Dẻo dai thơm ngon</small></div>
+
+  <div class="dv"><span>Chấm sốt</span></div>
   <div class="grid">
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">🌶️ Ớt cay</span></div>
       <div class="card-body"><div class="card-name">Dẻo chấm<br>ớt cay</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_ot',-1)">−</button><input class="st-num" type="number" id="deo_cham_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_ot',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_ot',-1)">−</button><input class="st-num" type="number" id="deo_cham_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_ot',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">🍋 Chanh dây</span></div>
       <div class="card-body"><div class="card-name">Dẻo chấm<br>chanh dây</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_chanh',-1)">−</button><input class="st-num" type="number" id="deo_cham_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_chanh',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_chanh',-1)">−</button><input class="st-num" type="number" id="deo_cham_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_chanh',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">🥚 Mayo</span></div>
       <div class="card-body"><div class="card-name">Dẻo chấm<br>mayo</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_mayo',-1)">−</button><input class="st-num" type="number" id="deo_cham_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_mayo',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_mayo',-1)">−</button><input class="st-num" type="number" id="deo_cham_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_mayo',1)">+</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-me">🍯 Sốt me</span></div>
+      <div class="card-body"><div class="card-name">Dẻo chấm<br>me</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_me',-1)">−</button><input class="st-num" type="number" id="deo_cham_me" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_me',1)">+</button></div>
       </div>
     </div>
   </div>
 
-  <div class="dv"><span>Xé trộn sốt</span></div>
-
-  <!-- BÁNH DẺO XÉ -->
+  <div class="dv"><span>Xé trộn cay</span></div>
   <div class="grid">
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">🌶️ Ớt cay</span></div>
       <div class="card-body"><div class="card-name">Dẻo xé<br>ớt cay</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_ot',-1)">−</button><input class="st-num" type="number" id="deo_xe_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_ot',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_ot',-1)">−</button><input class="st-num" type="number" id="deo_xe_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_ot',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">🍋 Chanh dây</span></div>
       <div class="card-body"><div class="card-name">Dẻo xé<br>chanh dây</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_chanh',-1)">−</button><input class="st-num" type="number" id="deo_xe_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_chanh',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_chanh',-1)">−</button><input class="st-num" type="number" id="deo_xe_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_chanh',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">🥚 Mayo</span></div>
       <div class="card-body"><div class="card-name">Dẻo xé<br>mayo</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_mayo',-1)">−</button><input class="st-num" type="number" id="deo_xe_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_mayo',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_mayo',-1)">−</button><input class="st-num" type="number" id="deo_xe_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_mayo',1)">+</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-me">🍯 Sốt me</span></div>
+      <div class="card-body"><div class="card-name">Dẻo xé<br>me</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_me',-1)">−</button><input class="st-num" type="number" id="deo_xe_me" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_me',1)">+</button></div>
       </div>
     </div>
   </div>
 
-  <!-- BÁNH TÔM CHẤM -->
-  <div class="sec-head" style="margin-top:30px">
-    <div class="sec-icon">🦐</div>
-    <div><h2>Bánh tôm — Chấm sốt</h2><small>Tôm giòn nguyên miếng</small></div>
-  </div>
+  <!-- BÁNH TÔM -->
+  <div class="sec-title">BÁNH TÔM<small>Tôm giòn nguyên miếng · Đậm đà hải vị</small></div>
+
+  <div class="dv"><span>Chấm sốt</span></div>
   <div class="grid">
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">🌶️ Ớt cay</span></div>
       <div class="card-body"><div class="card-name">Tôm chấm<br>ớt cay</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_ot',-1)">−</button><input class="st-num" type="number" id="tom_cham_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_ot',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_ot',-1)">−</button><input class="st-num" type="number" id="tom_cham_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_ot',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">🍋 Chanh dây</span></div>
       <div class="card-body"><div class="card-name">Tôm chấm<br>chanh dây</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_chanh',-1)">−</button><input class="st-num" type="number" id="tom_cham_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_chanh',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_chanh',-1)">−</button><input class="st-num" type="number" id="tom_cham_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_chanh',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">🥚 Mayo</span></div>
       <div class="card-body"><div class="card-name">Tôm chấm<br>mayo</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_mayo',-1)">−</button><input class="st-num" type="number" id="tom_cham_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_mayo',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_mayo',-1)">−</button><input class="st-num" type="number" id="tom_cham_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_mayo',1)">+</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-me">🍯 Sốt me</span></div>
+      <div class="card-body"><div class="card-name">Tôm chấm<br>me</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_me',-1)">−</button><input class="st-num" type="number" id="tom_cham_me" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_me',1)">+</button></div>
       </div>
     </div>
   </div>
 
-  <div class="dv"><span>Xé trộn sốt</span></div>
-
-  <!-- BÁNH TÔM XÉ -->
+  <div class="dv"><span>Xé trộn cay</span></div>
   <div class="grid">
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">🌶️ Ớt cay</span></div>
       <div class="card-body"><div class="card-name">Tôm xé<br>ớt cay</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_ot',-1)">−</button><input class="st-num" type="number" id="tom_xe_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_ot',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_ot',-1)">−</button><input class="st-num" type="number" id="tom_xe_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_ot',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">🍋 Chanh dây</span></div>
       <div class="card-body"><div class="card-name">Tôm xé<br>chanh dây</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_chanh',-1)">−</button><input class="st-num" type="number" id="tom_xe_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_chanh',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_chanh',-1)">−</button><input class="st-num" type="number" id="tom_xe_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_chanh',1)">+</button></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">🥚 Mayo</span></div>
       <div class="card-body"><div class="card-name">Tôm xé<br>mayo</div><div class="card-price">13.000đ</div>
-        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_mayo',-1)">−</button><input class="st-num" type="number" id="tom_xe_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_mayo',1)">&#43;</button></div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_mayo',-1)">−</button><input class="st-num" type="number" id="tom_xe_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_mayo',1)">+</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="ht">Thêm ảnh</span></div><span class="tag t-me">🍯 Sốt me</span></div>
+      <div class="card-body"><div class="card-name">Tôm xé<br>me</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_me',-1)">−</button><input class="st-num" type="number" id="tom_xe_me" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_me',1)">+</button></div>
       </div>
     </div>
   </div>
@@ -409,7 +555,7 @@ body {
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-handle"></div>
-    <h3>🛒 Xác nhận đơn hàng</h3>
+    <h3>🛒 Xác nhận đơn</h3>
     <div id="oItems"></div>
     <div class="tot-row"><span>Tổng cộng</span><span id="mTot">0đ</span></div>
 
@@ -442,7 +588,6 @@ body {
     </div>
 
     <div class="qr-box">
-      <!-- Thay bằng ảnh QR thật: <img src="qr.png" style="width:110px;border-radius:10px"> -->
       <div class="qr-ph">📱</div>
       <div class="bank">
         <strong>Ngân hàng:</strong> [Tên ngân hàng]<br>
@@ -471,19 +616,22 @@ var IDS = [
   {id:'deo_cham_ot',    ten:'Dẻo chấm Ớt cay'},
   {id:'deo_cham_chanh', ten:'Dẻo chấm Chanh dây'},
   {id:'deo_cham_mayo',  ten:'Dẻo chấm Mayo'},
+  {id:'deo_cham_me',    ten:'Dẻo chấm Sốt me'},
   {id:'deo_xe_ot',      ten:'Dẻo xé Ớt cay'},
   {id:'deo_xe_chanh',   ten:'Dẻo xé Chanh dây'},
   {id:'deo_xe_mayo',    ten:'Dẻo xé Mayo'},
+  {id:'deo_xe_me',      ten:'Dẻo xé Sốt me'},
   {id:'tom_cham_ot',    ten:'Tôm chấm Ớt cay'},
   {id:'tom_cham_chanh', ten:'Tôm chấm Chanh dây'},
   {id:'tom_cham_mayo',  ten:'Tôm chấm Mayo'},
+  {id:'tom_cham_me',    ten:'Tôm chấm Sốt me'},
   {id:'tom_xe_ot',      ten:'Tôm xé Ớt cay'},
   {id:'tom_xe_chanh',   ten:'Tôm xé Chanh dây'},
   {id:'tom_xe_mayo',    ten:'Tôm xé Mayo'},
+  {id:'tom_xe_me',      ten:'Tôm xé Sốt me'},
 ];
 function fmt(n){ return n.toLocaleString('vi-VN')+'đ'; }
 function q(id){ return Math.max(0, parseInt(document.getElementById(id).value)||0); }
-
 function chg(id, d){
   var el = document.getElementById(id);
   el.value = Math.max(0,(parseInt(el.value)||0)+d);
