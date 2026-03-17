@@ -2,655 +2,545 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đặt hàng bánh tráng</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bánh Tráng Order 🥢</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:wght@700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --red:     #c0392b;
-    --orange:  #e67e22;
-    --cream:   #fdf6ec;
-    --brown:   #5c3317;
-    --dark:    #1a0a00;
-    --card-bg: #fff9f2;
-    --border:  #f0dfc8;
-    --shadow:  0 4px 24px rgba(92,51,23,.10);
-  }
+:root {
+  --primary: #e8472a;
+  --orange:  #f97316;
+  --cream:   #fffbf5;
+  --card:    #ffffff;
+  --brown:   #7c3d12;
+  --text:    #1c0a00;
+  --muted:   #9a7860;
+  --border:  #fde8d0;
+  --shadow:  0 2px 16px rgba(231,71,42,.10);
+  --radius:  18px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 120px;
+}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* HERO */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  background: linear-gradient(160deg,#7c3d12 0%,#e8472a 55%,#f97316 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 40px 20px 52px;
+  text-align: center; overflow: hidden;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.18);
+  color: #fff; font-size: 11px; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 30px; margin-bottom: 12px;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem,8vw,3.4rem);
+  color: #fff; line-height: 1.1;
+  text-shadow: 0 2px 20px rgba(0,0,0,.2);
+}
+.hero p { color: rgba(255,255,255,.85); font-size: 14px; margin-top: 8px; font-weight: 700; }
+.hero-wave {
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 40px; background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
 
-  body {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    background: var(--cream);
-    color: var(--dark);
-    min-height: 100vh;
-  }
+/* CONTAINER */
+.wrap { max-width: 680px; margin: 0 auto; padding: 0 12px; }
 
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    width: 100%;
-    height: 340px;
-    background: var(--brown);
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: .55;
-    position: absolute; inset: 0;
-  }
-  .hero-placeholder {
-    width: 100%; height: 100%;
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, #5c3317 0%, #c0392b 50%, #e67e22 100%);
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 8px;
-  }
-  .hero-placeholder span { font-size: 52px; }
-  .hero-placeholder p { color: rgba(255,255,255,.5); font-size: 13px; }
-  .hero-content {
-    position: relative; z-index: 2;
-    text-align: center; color: #fff; padding: 24px;
-  }
-  .hero-content h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    font-weight: 900;
-    letter-spacing: -.5px;
-    text-shadow: 0 2px 16px rgba(0,0,0,.4);
-  }
-  .hero-content p {
-    margin-top: 8px;
-    font-size: 15px;
-    opacity: .9;
-    font-weight: 300;
-  }
+/* SECTION HEAD */
+.sec-head { display: flex; align-items: center; gap: 10px; margin: 26px 0 14px; }
+.sec-icon {
+  width: 42px; height: 42px; background: var(--border);
+  border-radius: 12px; display: flex; align-items: center;
+  justify-content: center; font-size: 20px; flex-shrink: 0;
+}
+.sec-head h2 { font-family:'Fraunces',serif; font-size:1.15rem; color:var(--brown); }
+.sec-head small { font-size:11px; color:var(--muted); font-weight:600; display:block; margin-top:2px; }
 
-  /* ── LAYOUT ── */
-  .container { max-width: 760px; margin: 0 auto; padding: 0 16px 80px; }
+/* GRID */
+.grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+@media(max-width:380px){ .grid{ grid-template-columns:repeat(2,1fr); } }
 
-  /* ── SECTION TITLE ── */
-  .section-title {
-    display: flex; align-items: center; gap: 10px;
-    margin: 40px 0 20px;
-  }
-  .section-title h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--brown);
-  }
-  .section-title .line {
-    flex: 1; height: 2px;
-    background: linear-gradient(to right, var(--border), transparent);
-  }
+/* CARD */
+.card {
+  background: var(--card); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  border: 1.5px solid var(--border);
+  transition: transform .2s, box-shadow .2s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(231,71,42,.15); }
+.card-img {
+  width: 100%; padding-top: 90%; position: relative;
+  background: linear-gradient(135deg,#fde8d0,#fef3e2); overflow: hidden;
+}
+.card-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+.card-ph {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+}
+.card-ph .em { font-size: 30px; }
+.card-ph .ht { font-size: 9px; color: var(--muted); text-align: center; padding: 0 6px; }
+.tag {
+  position: absolute; top: 7px; left: 7px;
+  font-size: 9px; font-weight: 900;
+  padding: 3px 7px; border-radius: 20px; letter-spacing: .3px;
+}
+.t-ot    { background: #fee2e2; color: #991b1b; }
+.t-chanh { background: #fef9c3; color: #854d0e; }
+.t-mayo  { background: #f0fdf4; color: #166534; }
 
-  /* ── PRODUCT CARD ── */
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-  }
-  .product-card {
-    background: var(--card-bg);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform .2s, box-shadow .2s;
-  }
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(92,51,23,.15);
-  }
-  .product-img {
-    width: 100%; height: 140px;
-    object-fit: cover;
-    display: block;
-    background: linear-gradient(135deg, #f5e6d3, #fdf0e0);
-  }
-  .product-img-placeholder {
-    width: 100%; height: 140px;
-    background: linear-gradient(135deg, #fde8cc, #fbd4a8);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 42px;
-    flex-direction: column; gap: 4px;
-  }
-  .product-img-placeholder span.label {
-    font-size: 10px;
-    color: rgba(92,51,23,.4);
-    font-family: 'Be Vietnam Pro', sans-serif;
-  }
-  .product-info { padding: 14px 14px 16px; }
-  .product-name {
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--brown);
-    line-height: 1.4;
-    min-height: 40px;
-  }
-  .product-sauce {
-    display: inline-block;
-    margin-top: 6px;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 20px;
-    background: var(--border);
-    color: var(--brown);
-  }
-  .qty-row {
-    display: flex; align-items: center; gap: 8px;
-    margin-top: 12px;
-  }
-  .qty-label { font-size: 12px; color: #888; white-space: nowrap; }
-  .qty-input {
-    flex: 1;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-size: 15px;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    color: var(--dark);
-    background: #fff;
-    text-align: center;
-    transition: border-color .2s;
-    width: 100%;
-  }
-  .qty-input:focus {
-    outline: none;
-    border-color: var(--orange);
-  }
-  .qty-input::placeholder { color: #ccc; font-size: 13px; }
+.card-body { padding: 9px 9px 11px; }
+.card-name { font-size: 11.5px; font-weight: 800; line-height: 1.3; min-height: 30px; }
+.card-price { font-size: 13px; font-weight: 900; color: var(--primary); margin: 3px 0 7px; }
 
-  /* ── DIVIDER ── */
-  .type-divider {
-    text-align: center;
-    position: relative;
-    margin: 32px 0 20px;
-  }
-  .type-divider::before {
-    content: '';
-    position: absolute; top: 50%; left: 0; right: 0;
-    height: 1px; background: var(--border);
-  }
-  .type-divider span {
-    position: relative;
-    background: var(--cream);
-    padding: 0 16px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--red);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+/* STEPPER */
+.stepper {
+  display: flex; align-items: center; justify-content: space-between;
+  border: 1.5px solid var(--border); border-radius: 30px;
+  height: 30px; background: var(--cream);
+  width: 100%;
+}
+.st-btn {
+  width: 28px; height: 28px; min-width: 28px;
+  background: none; border: none;
+  font-size: 16px; font-weight: 900;
+  color: var(--primary); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s; flex-shrink: 0;
+  border-radius: 50%;
+  line-height: 1;
+}
+.st-btn:hover { background: var(--border); }
+.st-num {
+  flex: 1; text-align: center;
+  font-size: 13px; font-weight: 900;
+  border: none; background: none; outline: none;
+  color: var(--text); min-width: 0; width: 100%;
+}
+.st-num::-webkit-inner-spin-button,
+.st-num::-webkit-outer-spin-button { -webkit-appearance: none; }
+.st-num { -moz-appearance: textfield; }
 
-  /* ── FORM FIELDS ── */
-  .form-group { margin-bottom: 18px; }
-  .form-group label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--brown);
-    margin-bottom: 6px;
-  }
-  .form-group label .req { color: var(--red); margin-left: 2px; }
-  .form-control {
-    width: 100%;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 14px;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    color: var(--dark);
-    background: #fff;
-    transition: border-color .2s;
-  }
-  .form-control:focus { outline: none; border-color: var(--orange); }
-  textarea.form-control { resize: vertical; min-height: 80px; }
+/* DIVIDER */
+.dv {
+  display: flex; align-items: center; gap: 10px;
+  margin: 22px 0 14px;
+}
+.dv::before,.dv::after { content:''; flex:1; height:1px; background:var(--border); }
+.dv span { font-size:10px; font-weight:900; color:var(--primary); letter-spacing:1.5px; text-transform:uppercase; white-space:nowrap; }
 
-  .radio-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-  .radio-option { display: none; }
-  .radio-label {
-    padding: 8px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .2s;
-    background: #fff;
-    color: var(--dark);
-    user-select: none;
-  }
-  .radio-option:checked + .radio-label {
-    border-color: var(--red);
-    background: var(--red);
-    color: #fff;
-  }
+/* STICKY CART */
+.cart-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #fff; border-top: 2px solid var(--border);
+  padding: 10px 14px 14px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.08);
+  z-index: 100; display: none;
+}
+.cart-bar.show { display: block; }
+.cart-inner { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.cart-txt { flex: 1; }
+.cart-cnt { font-size: 11px; color: var(--muted); font-weight: 700; }
+.cart-tot { font-size: 20px; font-weight: 900; color: var(--primary); }
+.btn-order {
+  background: linear-gradient(135deg,var(--primary),var(--orange));
+  color: #fff; border: none; border-radius: 14px;
+  padding: 12px 22px;
+  font-family: 'Nunito',sans-serif; font-size: 14px; font-weight: 900;
+  cursor: pointer; box-shadow: 0 4px 16px rgba(231,71,42,.35);
+  transition: transform .15s, box-shadow .15s; white-space: nowrap;
+}
+.btn-order:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(231,71,42,.45); }
 
-  /* ── QR SECTION ── */
-  .qr-section {
-    background: var(--card-bg);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    text-align: center;
-    margin-top: 12px;
-  }
-  .qr-box {
-    width: 160px; height: 160px;
-    margin: 0 auto 14px;
-    background: linear-gradient(135deg, #f5e6d3, #fde8cc);
-    border-radius: 12px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 4px; border: 2px dashed var(--border);
-    font-size: 36px;
-  }
-  .qr-box p { font-size: 10px; color: rgba(92,51,23,.4); font-family: 'Be Vietnam Pro'; }
-  .bank-info { font-size: 13px; line-height: 1.8; color: var(--dark); }
-  .bank-info strong { color: var(--brown); }
+/* MODAL */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.5); z-index: 200;
+  align-items: flex-end; backdrop-filter: blur(2px);
+}
+.overlay.show { display: flex; }
+.modal {
+  background: #fff; border-radius: 24px 24px 0 0;
+  width: 100%; max-width: 680px; margin: 0 auto;
+  max-height: 92vh; overflow-y: auto;
+  padding: 20px 16px 40px;
+  animation: up .3s ease;
+}
+@keyframes up { from{transform:translateY(100%)} to{transform:translateY(0)} }
+.modal-handle {
+  width: 38px; height: 4px; background: var(--border);
+  border-radius: 4px; margin: 0 auto 18px;
+}
+.modal h3 { font-family:'Fraunces',serif; font-size:1.2rem; color:var(--brown); margin-bottom:14px; }
 
-  /* ── SUBMIT ── */
-  .submit-wrap { margin-top: 32px; }
-  .btn-submit {
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--red), var(--orange));
-    color: #fff;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    letter-spacing: .3px;
-    box-shadow: 0 4px 20px rgba(192,57,43,.35);
-    transition: transform .15s, box-shadow .15s;
-  }
-  .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(192,57,43,.45);
-  }
-  .btn-submit:active { transform: translateY(0); }
+/* ORDER SUMMARY */
+.oi {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+}
+.oi:last-child { border-bottom: none; }
+.oi-name { font-weight: 700; flex: 1; }
+.oi-qty  { color: var(--muted); margin: 0 10px; }
+.oi-price { font-weight: 900; color: var(--primary); }
+.tot-row {
+  display: flex; justify-content: space-between;
+  padding: 12px 0 0; font-size: 16px; font-weight: 900;
+  border-top: 2px solid var(--border); margin-bottom: 18px;
+}
+.tot-row span:last-child { color: var(--primary); }
 
-  /* ── SUCCESS ── */
-  .success-toast {
-    display: none;
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-    background: var(--brown); color: #fff;
-    padding: 14px 28px; border-radius: 40px;
-    font-size: 14px; font-weight: 500;
-    box-shadow: 0 8px 32px rgba(0,0,0,.2);
-    z-index: 999; white-space: nowrap;
-    animation: slideUp .3s ease;
-  }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-  }
+/* FORM */
+.fg { margin-bottom: 13px; }
+.fg label {
+  display: block; font-size: 11px; font-weight: 900;
+  color: var(--brown); margin-bottom: 5px;
+  text-transform: uppercase; letter-spacing: .5px;
+}
+.req { color: var(--primary); }
+.fc {
+  width: 100%; border: 2px solid var(--border);
+  border-radius: 12px; padding: 10px 13px;
+  font-size: 15px; font-family: 'Nunito',sans-serif;
+  color: var(--text); background: var(--cream);
+  transition: border-color .2s; outline: none;
+}
+.fc:focus { border-color: var(--primary); background: #fff; }
+.rg { display: flex; flex-wrap: wrap; gap: 7px; }
+.ro { display: none; }
+.rl {
+  padding: 8px 14px; border: 2px solid var(--border);
+  border-radius: 30px; font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: all .2s;
+  background: var(--cream); user-select: none;
+}
+.ro:checked + .rl { border-color: var(--primary); background: var(--primary); color: #fff; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 480px) {
-    .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .product-img-placeholder { height: 110px; font-size: 32px; }
-    .product-name { font-size: 12px; min-height: unset; }
-  }
+/* QR */
+.qr-box {
+  background: var(--cream); border: 2px solid var(--border);
+  border-radius: 14px; padding: 14px; text-align: center; margin: 6px 0 13px;
+}
+.qr-ph {
+  width: 110px; height: 110px; margin: 0 auto 10px;
+  background: var(--border); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; border: 2px dashed #e2c9b0;
+}
+.bank { font-size: 12px; color: var(--text); line-height: 1.8; }
+.bank strong { color: var(--brown); }
+
+.btn-confirm {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg,var(--primary),var(--orange));
+  color: #fff; border: none; border-radius: 14px;
+  font-family: 'Nunito',sans-serif; font-size: 15px; font-weight: 900;
+  cursor: pointer; box-shadow: 0 4px 16px rgba(231,71,42,.3);
+  transition: transform .15s; margin-top: 6px;
+}
+.btn-confirm:hover { transform: translateY(-2px); }
+.btn-confirm:disabled { opacity: .6; transform: none; }
+.btn-back {
+  width: 100%; padding: 11px; background: none;
+  border: 2px solid var(--border); border-radius: 14px;
+  font-family: 'Nunito',sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--muted); cursor: pointer; margin-top: 7px;
+}
+
+/* TOAST */
+.toast {
+  display: none; position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  background: #1c0a00; color: #fff;
+  padding: 12px 22px; border-radius: 40px;
+  font-size: 13px; font-weight: 700;
+  box-shadow: 0 8px 32px rgba(0,0,0,.25);
+  z-index: 999; white-space: nowrap;
+  animation: fadeUp .3s ease;
+}
+@keyframes fadeUp {
+  from{opacity:0;transform:translateX(-50%) translateY(14px)}
+  to{opacity:1;transform:translateX(-50%) translateY(0)}
+}
 </style>
 </head>
 <body>
 
-<!-- ══ HERO ══ -->
 <div class="hero">
-  <!-- Thay src bằng ảnh banner thật của bạn, hoặc xoá thẻ img này -->
-  <!-- <img class="hero-img" src="banner.jpg" alt="Bánh tráng"> -->
-  <div class="hero-placeholder">
-    <span>🥢</span>
-    <p>Thay bằng ảnh banner thật — xoá div này khi có ảnh</p>
+  <div class="hero-badge">Order ngay · Giao tận nơi</div>
+  <h1>Bánh Tráng 🥢</h1>
+  <p>Dẻo dai & Tôm giòn · Ớt cay · Chanh dây · Mayo</p>
+  <div class="hero-wave"></div>
+</div>
+
+<div class="wrap">
+
+  <!-- BÁNH DẺO CHẤM -->
+  <div class="sec-head">
+    <div class="sec-icon">🍘</div>
+    <div><h2>Bánh dẻo — Chấm sốt</h2><small>Bánh nguyên miếng, chấm riêng</small></div>
   </div>
-  <div class="hero-content">
-    <h1>Bánh Tráng ✨</h1>
-    <p>Dẻo dai & Tôm giòn — Sốt ớt · Chanh dây · Mayonnaise</p>
+  <div class="grid">
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-body"><div class="card-name">Dẻo chấm<br>ớt cay</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_ot',-1)">−</button><input class="st-num" type="number" id="deo_cham_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_ot',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-body"><div class="card-name">Dẻo chấm<br>chanh dây</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_chanh',-1)">−</button><input class="st-num" type="number" id="deo_cham_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_chanh',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-body"><div class="card-name">Dẻo chấm<br>mayo</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_cham_mayo',-1)">−</button><input class="st-num" type="number" id="deo_cham_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_cham_mayo',1)">&#43;</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv"><span>Xé trộn sốt</span></div>
+
+  <!-- BÁNH DẺO XÉ -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-body"><div class="card-name">Dẻo xé<br>ớt cay</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_ot',-1)">−</button><input class="st-num" type="number" id="deo_xe_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_ot',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-body"><div class="card-name">Dẻo xé<br>chanh dây</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_chanh',-1)">−</button><input class="st-num" type="number" id="deo_xe_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_chanh',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-body"><div class="card-name">Dẻo xé<br>mayo</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('deo_xe_mayo',-1)">−</button><input class="st-num" type="number" id="deo_xe_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('deo_xe_mayo',1)">&#43;</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BÁNH TÔM CHẤM -->
+  <div class="sec-head" style="margin-top:30px">
+    <div class="sec-icon">🦐</div>
+    <div><h2>Bánh tôm — Chấm sốt</h2><small>Tôm giòn nguyên miếng</small></div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-body"><div class="card-name">Tôm chấm<br>ớt cay</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_ot',-1)">−</button><input class="st-num" type="number" id="tom_cham_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_ot',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-body"><div class="card-name">Tôm chấm<br>chanh dây</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_chanh',-1)">−</button><input class="st-num" type="number" id="tom_cham_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_chanh',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-body"><div class="card-name">Tôm chấm<br>mayo</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_cham_mayo',-1)">−</button><input class="st-num" type="number" id="tom_cham_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_cham_mayo',1)">&#43;</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dv"><span>Xé trộn sốt</span></div>
+
+  <!-- BÁNH TÔM XÉ -->
+  <div class="grid">
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🌶️</span><span class="ht">Thêm ảnh</span></div><span class="tag t-ot">Ớt cay</span></div>
+      <div class="card-body"><div class="card-name">Tôm xé<br>ớt cay</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_ot',-1)">−</button><input class="st-num" type="number" id="tom_xe_ot" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_ot',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🍋</span><span class="ht">Thêm ảnh</span></div><span class="tag t-chanh">Chanh dây</span></div>
+      <div class="card-body"><div class="card-name">Tôm xé<br>chanh dây</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_chanh',-1)">−</button><input class="st-num" type="number" id="tom_xe_chanh" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_chanh',1)">&#43;</button></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img"><div class="card-ph"><span class="em">🥚</span><span class="ht">Thêm ảnh</span></div><span class="tag t-mayo">Mayo</span></div>
+      <div class="card-body"><div class="card-name">Tôm xé<br>mayo</div><div class="card-price">13.000đ</div>
+        <div class="stepper"><button class="st-btn" onclick="chg('tom_xe_mayo',-1)">−</button><input class="st-num" type="number" id="tom_xe_mayo" value="0" min="0" oninput="upCart()"><button class="st-btn" onclick="chg('tom_xe_mayo',1)">&#43;</button></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- STICKY CART -->
+<div class="cart-bar" id="cartBar">
+  <div class="cart-inner">
+    <div class="cart-txt">
+      <div class="cart-cnt" id="cartCnt">0 gói</div>
+      <div class="cart-tot" id="cartTot">0đ</div>
+    </div>
+    <button class="btn-order" onclick="openModal()">Đặt hàng →</button>
   </div>
 </div>
 
-<div class="container">
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>🛒 Xác nhận đơn hàng</h3>
+    <div id="oItems"></div>
+    <div class="tot-row"><span>Tổng cộng</span><span id="mTot">0đ</span></div>
 
-  <!-- ══ BẢNG ORDER ══ -->
-  <div class="section-title">
-    <h2>🛒 Đặt hàng</h2>
-    <div class="line"></div>
-  </div>
-  <p style="font-size:13px;color:#888;margin-bottom:20px">Nhập số lượng (gói) vào ô bên dưới từng combo — để trống nếu không lấy</p>
-
-  <!-- 🫓 DẺO CHẤM -->
-  <div class="type-divider"><span>🫓 Bánh tráng dẻo — Chấm sốt</span></div>
-  <div class="product-grid">
-
-    <div class="product-card">
-      <!-- Thay src bằng ảnh thật: <img class="product-img" src="deo-cham-ot.jpg"> -->
-      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tráng dẻo<br>Chấm sốt</div>
-        <span class="product-sauce">🌶️ Ớt cay</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_cham_ot">
-        </div>
+    <div class="fg">
+      <label>Họ và tên <span class="req">*</span></label>
+      <input class="fc" id="name" type="text" placeholder="Nguyễn Văn A">
+    </div>
+    <div class="fg">
+      <label>Số điện thoại <span class="req">*</span></label>
+      <input class="fc" id="phone" type="tel" placeholder="09xx xxx xxx">
+    </div>
+    <div class="fg">
+      <label>Nhận hàng <span class="req">*</span></label>
+      <div class="rg">
+        <input type="radio" name="delivery" id="d1" value="Giao tận nơi" class="ro" checked><label for="d1" class="rl">🚚 Giao tận nơi</label>
+        <input type="radio" name="delivery" id="d2" value="Tự đến lấy" class="ro"><label for="d2" class="rl">🏪 Tự đến lấy</label>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Địa chỉ giao</label>
+      <input class="fc" id="address" placeholder="Để trống nếu tự lấy">
+    </div>
+    <div class="fg">
+      <label>Thanh toán <span class="req">*</span></label>
+      <div class="rg">
+        <input type="radio" name="payment" id="p1" value="Tiền mặt (COD)" class="ro" checked><label for="p1" class="rl">💵 COD</label>
+        <input type="radio" name="payment" id="p2" value="Chuyển khoản" class="ro"><label for="p2" class="rl">🏦 Chuyển khoản</label>
+        <input type="radio" name="payment" id="p3" value="MoMo" class="ro"><label for="p3" class="rl">📱 MoMo</label>
       </div>
     </div>
 
-    <div class="product-card">
-      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tráng dẻo<br>Chấm sốt</div>
-        <span class="product-sauce">🍋 Chanh dây</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_cham_chanh">
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tráng dẻo<br>Chấm sốt</div>
-        <span class="product-sauce">🥚 Mayonnaise</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_cham_mayo">
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /dẻo chấm -->
-
-  <!-- 🫓 DẺO XÉ -->
-  <div class="type-divider"><span>🫓 Bánh tráng dẻo — Xé trộn sốt</span></div>
-  <div class="product-grid">
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tráng dẻo<br>Xé trộn sốt</div>
-        <span class="product-sauce">🌶️ Ớt cay</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_xe_ot">
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tráng dẻo<br>Xé trộn sốt</div>
-        <span class="product-sauce">🍋 Chanh dây</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_xe_chanh">
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tráng dẻo<br>Xé trộn sốt</div>
-        <span class="product-sauce">🥚 Mayonnaise</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_xe_mayo">
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /dẻo xé -->
-
-  <!-- 🦐 TÔM CHẤM -->
-  <div class="type-divider"><span>🦐 Bánh tôm — Chấm sốt</span></div>
-  <div class="product-grid">
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tôm<br>Chấm sốt</div>
-        <span class="product-sauce">🌶️ Ớt cay</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_cham_ot">
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tôm<br>Chấm sốt</div>
-        <span class="product-sauce">🍋 Chanh dây</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_cham_chanh">
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tôm<br>Chấm sốt</div>
-        <span class="product-sauce">🥚 Mayonnaise</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_cham_mayo">
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /tôm chấm -->
-
-  <!-- 🦐 TÔM XÉ -->
-  <div class="type-divider"><span>🦐 Bánh tôm — Xé trộn sốt</span></div>
-  <div class="product-grid">
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tôm<br>Xé trộn sốt</div>
-        <span class="product-sauce">🌶️ Ớt cay</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_xe_ot">
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tôm<br>Xé trộn sốt</div>
-        <span class="product-sauce">🍋 Chanh dây</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_xe_chanh">
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
-      <div class="product-info">
-        <div class="product-name">Bánh tôm<br>Xé trộn sốt</div>
-        <span class="product-sauce">🥚 Mayonnaise</span>
-        <div class="qty-row">
-          <span class="qty-label">Số gói</span>
-          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_xe_mayo">
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /tôm xé -->
-
-  <!-- ══ GHI CHÚ ══ -->
-  <div class="form-group" style="margin-top:28px">
-    <label>📝 Ghi chú thêm</label>
-    <textarea class="form-control" id="note" placeholder="Yêu cầu đặc biệt, giờ giao hàng mong muốn..."></textarea>
-  </div>
-
-  <!-- ══ THÔNG TIN NGƯỜI ĐẶT ══ -->
-  <div class="section-title">
-    <h2>📋 Thông tin người đặt</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="form-group">
-    <label>Họ và tên <span class="req">*</span></label>
-    <input class="form-control" id="name" type="text" placeholder="Nguyễn Văn A">
-  </div>
-
-  <div class="form-group">
-    <label>Số điện thoại <span class="req">*</span></label>
-    <input class="form-control" id="phone" type="tel" placeholder="09xx xxx xxx">
-  </div>
-
-  <div class="form-group">
-    <label>Phương thức nhận hàng <span class="req">*</span></label>
-    <div class="radio-group">
-      <input type="radio" name="delivery" id="d1" value="Giao tận nơi" class="radio-option" checked>
-      <label for="d1" class="radio-label">🚚 Giao tận nơi</label>
-      <input type="radio" name="delivery" id="d2" value="Tự đến lấy" class="radio-option">
-      <label for="d2" class="radio-label">🏪 Tự đến lấy</label>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label>Địa chỉ giao hàng</label>
-    <input class="form-control" id="address" type="text" placeholder="Để trống nếu tự đến lấy">
-  </div>
-
-  <!-- ══ THANH TOÁN ══ -->
-  <div class="section-title">
-    <h2>💳 Thanh toán</h2>
-    <div class="line"></div>
-  </div>
-
-  <div class="qr-section">
-    <!-- Thay bằng ảnh QR thật: <img src="qr.png" style="width:160px;border-radius:12px"> -->
     <div class="qr-box">
-      📱
-      <p>Ảnh QR tại đây</p>
+      <!-- Thay bằng ảnh QR thật: <img src="qr.png" style="width:110px;border-radius:10px"> -->
+      <div class="qr-ph">📱</div>
+      <div class="bank">
+        <strong>Ngân hàng:</strong> [Tên ngân hàng]<br>
+        <strong>Số TK:</strong> [Số tài khoản]<br>
+        <strong>Chủ TK:</strong> [Họ tên]<br>
+        <strong>MoMo:</strong> [Số điện thoại]
+      </div>
     </div>
-    <div class="bank-info">
-      <!-- ✏️ Sửa thông tin ngân hàng của bạn vào đây -->
-      <strong>Ngân hàng:</strong> [Tên ngân hàng]<br>
-      <strong>Số TK:</strong> [Số tài khoản]<br>
-      <strong>Chủ TK:</strong> [Họ tên]<br>
-      <strong>MoMo / ZaloPay:</strong> [Số điện thoại]
+
+    <div class="fg">
+      <label>Ghi chú</label>
+      <input class="fc" id="note" placeholder="Yêu cầu đặc biệt...">
     </div>
+
+    <button class="btn-confirm" id="btnOk" onclick="submit()">✅ Xác nhận đặt hàng</button>
+    <button class="btn-back" onclick="closeModal()">← Quay lại chọn thêm</button>
   </div>
+</div>
 
-  <div class="form-group" style="margin-top:18px">
-    <label>Bạn sẽ thanh toán bằng <span class="req">*</span></label>
-    <div class="radio-group">
-      <input type="radio" name="payment" id="p1" value="Tiền mặt (COD)" class="radio-option" checked>
-      <label for="p1" class="radio-label">💵 Tiền mặt (COD)</label>
-      <input type="radio" name="payment" id="p2" value="Chuyển khoản" class="radio-option">
-      <label for="p2" class="radio-label">🏦 Chuyển khoản</label>
-      <input type="radio" name="payment" id="p3" value="MoMo" class="radio-option">
-      <label for="p3" class="radio-label">📱 MoMo</label>
-      <input type="radio" name="payment" id="p4" value="ZaloPay" class="radio-option">
-      <label for="p4" class="radio-label">📱 ZaloPay</label>
-    </div>
-  </div>
-
-  <!-- ══ GỬI ĐƠN ══ -->
-  <div class="submit-wrap">
-    <button class="btn-submit" onclick="submitOrder()">
-      🛒 Gửi đơn hàng
-    </button>
-  </div>
-
-</div><!-- /container -->
-
-<div class="success-toast" id="toast">✅ Đơn hàng đã gửi! Mình sẽ liên hệ sớm nhé 🥰</div>
+<div class="toast" id="toast">✅ Đặt hàng thành công! Mình liên hệ sớm nhé 🥰</div>
 
 <script>
-  // ✏️ BƯỚC DUY NHẤT CẦN LÀM:
-  // Dán URL Apps Script (dạng .../exec) vào đây sau khi deploy
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbypOkfeIaqPGGds01hLT7o6Co0hWpGvbmiG19j3ADHHwKE0XT041z9cl1S0PsDGg-nL/exec';
+var URL = 'https://script.google.com/macros/s/AKfycbypOkfeIaqPGGds01hLT7o6Co0hWpGvbmiG19j3ADHHwKE0XT041z9cl1S0PsDGg-nL/exec';
+var GIA = 13000;
+var IDS = [
+  {id:'deo_cham_ot',    ten:'Dẻo chấm Ớt cay'},
+  {id:'deo_cham_chanh', ten:'Dẻo chấm Chanh dây'},
+  {id:'deo_cham_mayo',  ten:'Dẻo chấm Mayo'},
+  {id:'deo_xe_ot',      ten:'Dẻo xé Ớt cay'},
+  {id:'deo_xe_chanh',   ten:'Dẻo xé Chanh dây'},
+  {id:'deo_xe_mayo',    ten:'Dẻo xé Mayo'},
+  {id:'tom_cham_ot',    ten:'Tôm chấm Ớt cay'},
+  {id:'tom_cham_chanh', ten:'Tôm chấm Chanh dây'},
+  {id:'tom_cham_mayo',  ten:'Tôm chấm Mayo'},
+  {id:'tom_xe_ot',      ten:'Tôm xé Ớt cay'},
+  {id:'tom_xe_chanh',   ten:'Tôm xé Chanh dây'},
+  {id:'tom_xe_mayo',    ten:'Tôm xé Mayo'},
+];
+function fmt(n){ return n.toLocaleString('vi-VN')+'đ'; }
+function q(id){ return Math.max(0, parseInt(document.getElementById(id).value)||0); }
 
-  var FIELDS = [
-    'deo_cham_ot','deo_cham_chanh','deo_cham_mayo',
-    'deo_xe_ot',  'deo_xe_chanh',  'deo_xe_mayo',
-    'tom_cham_ot','tom_cham_chanh','tom_cham_mayo',
-    'tom_xe_ot',  'tom_xe_chanh',  'tom_xe_mayo',
-  ];
-
-  function submitOrder() {
-    var name     = document.getElementById('name').value.trim();
-    var phone    = document.getElementById('phone').value.trim();
-    var delivery = document.querySelector('input[name="delivery"]:checked').value;
-    var address  = document.getElementById('address').value.trim();
-    var payment  = document.querySelector('input[name="payment"]:checked').value;
-    var note     = document.getElementById('note').value.trim();
-
-    if (!name || !phone) {
-      alert('Vui lòng điền Họ tên và Số điện thoại nhé! 🙏');
-      return;
-    }
-
-    // Gom data các combo
-    var data = { name: name, phone: phone, delivery: delivery,
-                 address: address, payment: payment, note: note };
-    var coSanPham = false;
-    FIELDS.forEach(function(f) {
-      var el  = document.querySelector('[name="' + f + '"]');
-      var qty = parseInt(el ? el.value : 0) || 0;
-      data[f] = qty;
-      if (qty > 0) coSanPham = true;
-    });
-
-    if (!coSanPham) {
-      alert('Bạn chưa chọn sản phẩm nào! Nhập số lượng vào ít nhất 1 combo nhé 😊');
-      return;
-    }
-
-    // Disable nút, hiện loading
-    var btn = document.querySelector('.btn-submit');
-    btn.disabled = true;
-    btn.textContent = '⏳ Đang gửi đơn...';
-
-    // Gửi lên Google Sheets qua Apps Script
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode:   'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(function() {
-      // Hiện toast thành công
-      var toast = document.getElementById('toast');
-      toast.style.display = 'block';
-      setTimeout(function() { toast.style.display = 'none'; }, 5000);
-
-      // Reset form
-      document.querySelectorAll('.qty-input').forEach(function(el) { el.value = ''; });
-      document.getElementById('name').value    = '';
-      document.getElementById('phone').value   = '';
-      document.getElementById('address').value = '';
-      document.getElementById('note').value    = '';
-      btn.disabled    = false;
-      btn.textContent = '🛒 Gửi đơn hàng';
-    })
-    .catch(function() {
-      alert('Có lỗi xảy ra, vui lòng thử lại hoặc liên hệ trực tiếp nhé!');
-      btn.disabled    = false;
-      btn.textContent = '🛒 Gửi đơn hàng';
-    });
-  }
+function chg(id, d){
+  var el = document.getElementById(id);
+  el.value = Math.max(0,(parseInt(el.value)||0)+d);
+  upCart();
+}
+function upCart(){
+  var goi=0, tien=0;
+  IDS.forEach(function(c){ var v=q(c.id); goi+=v; tien+=v*GIA; });
+  var bar = document.getElementById('cartBar');
+  if(goi>0){
+    bar.classList.add('show');
+    document.getElementById('cartCnt').textContent = goi+' gói';
+    document.getElementById('cartTot').textContent = fmt(tien);
+  } else { bar.classList.remove('show'); }
+}
+function openModal(){
+  var items = IDS.filter(function(c){ return q(c.id)>0; });
+  var tot=0;
+  var html = items.map(function(c){
+    var v=q(c.id); tot+=v*GIA;
+    return '<div class="oi"><span class="oi-name">'+c.ten+'</span><span class="oi-qty">x'+v+'</span><span class="oi-price">'+fmt(v*GIA)+'</span></div>';
+  }).join('');
+  document.getElementById('oItems').innerHTML = html;
+  document.getElementById('mTot').textContent = fmt(tot);
+  document.getElementById('overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+function submit(){
+  var name    = document.getElementById('name').value.trim();
+  var phone   = document.getElementById('phone').value.trim();
+  var delivery= document.querySelector('input[name="delivery"]:checked').value;
+  var address = document.getElementById('address').value.trim();
+  var payment = document.querySelector('input[name="payment"]:checked').value;
+  var note    = document.getElementById('note').value.trim();
+  if(!name||!phone){ alert('Vui lòng điền Họ tên và Số điện thoại nhé! 🙏'); return; }
+  var data = {name:name,phone:phone,delivery:delivery,address:address,payment:payment,note:note};
+  IDS.forEach(function(c){ data[c.id]=q(c.id); });
+  var btn=document.getElementById('btnOk');
+  btn.disabled=true; btn.textContent='⏳ Đang gửi...';
+  fetch(URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+  .then(function(){
+    closeModal();
+    IDS.forEach(function(c){ document.getElementById(c.id).value=0; });
+    ['name','phone','address','note'].forEach(function(id){ document.getElementById(id).value=''; });
+    upCart();
+    var t=document.getElementById('toast');
+    t.style.display='block';
+    setTimeout(function(){ t.style.display='none'; },4000);
+    btn.disabled=false; btn.textContent='✅ Xác nhận đặt hàng';
+  })
+  .catch(function(){ alert('Có lỗi xảy ra, thử lại nhé!'); btn.disabled=false; btn.textContent='✅ Xác nhận đặt hàng'; });
+}
+document.getElementById('overlay').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
 </script>
 </body>
 </html>
