@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đặt hàng bánh tráng</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:     #c0392b;
+    --orange:  #e67e22;
+    --cream:   #fdf6ec;
+    --brown:   #5c3317;
+    --dark:    #1a0a00;
+    --card-bg: #fff9f2;
+    --border:  #f0dfc8;
+    --shadow:  0 4px 24px rgba(92,51,23,.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: var(--brown);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: .55;
+    position: absolute; inset: 0;
+  }
+  .hero-placeholder {
+    width: 100%; height: 100%;
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #5c3317 0%, #c0392b 50%, #e67e22 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+  }
+  .hero-placeholder span { font-size: 52px; }
+  .hero-placeholder p { color: rgba(255,255,255,.5); font-size: 13px; }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; color: #fff; padding: 24px;
+  }
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: -.5px;
+    text-shadow: 0 2px 16px rgba(0,0,0,.4);
+  }
+  .hero-content p {
+    margin-top: 8px;
+    font-size: 15px;
+    opacity: .9;
+    font-weight: 300;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px 80px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    margin: 40px 0 20px;
+  }
+  .section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--brown);
+  }
+  .section-title .line {
+    flex: 1; height: 2px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  /* ── PRODUCT CARD ── */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .product-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(92,51,23,.15);
+  }
+  .product-img {
+    width: 100%; height: 140px;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, #f5e6d3, #fdf0e0);
+  }
+  .product-img-placeholder {
+    width: 100%; height: 140px;
+    background: linear-gradient(135deg, #fde8cc, #fbd4a8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px;
+    flex-direction: column; gap: 4px;
+  }
+  .product-img-placeholder span.label {
+    font-size: 10px;
+    color: rgba(92,51,23,.4);
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  .product-info { padding: 14px 14px 16px; }
+  .product-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--brown);
+    line-height: 1.4;
+    min-height: 40px;
+  }
+  .product-sauce {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--border);
+    color: var(--brown);
+  }
+  .qty-row {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 12px;
+  }
+  .qty-label { font-size: 12px; color: #888; white-space: nowrap; }
+  .qty-input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 15px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--dark);
+    background: #fff;
+    text-align: center;
+    transition: border-color .2s;
+    width: 100%;
+  }
+  .qty-input:focus {
+    outline: none;
+    border-color: var(--orange);
+  }
+  .qty-input::placeholder { color: #ccc; font-size: 13px; }
+
+  /* ── DIVIDER ── */
+  .type-divider {
+    text-align: center;
+    position: relative;
+    margin: 32px 0 20px;
+  }
+  .type-divider::before {
+    content: '';
+    position: absolute; top: 50%; left: 0; right: 0;
+    height: 1px; background: var(--border);
+  }
+  .type-divider span {
+    position: relative;
+    background: var(--cream);
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--red);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── FORM FIELDS ── */
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .form-group label .req { color: var(--red); margin-left: 2px; }
+  .form-control {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--dark);
+    background: #fff;
+    transition: border-color .2s;
+  }
+  .form-control:focus { outline: none; border-color: var(--orange); }
+  textarea.form-control { resize: vertical; min-height: 80px; }
+
+  .radio-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .radio-option { display: none; }
+  .radio-label {
+    padding: 8px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    background: #fff;
+    color: var(--dark);
+    user-select: none;
+  }
+  .radio-option:checked + .radio-label {
+    border-color: var(--red);
+    background: var(--red);
+    color: #fff;
+  }
+
+  /* ── QR SECTION ── */
+  .qr-section {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .qr-box {
+    width: 160px; height: 160px;
+    margin: 0 auto 14px;
+    background: linear-gradient(135deg, #f5e6d3, #fde8cc);
+    border-radius: 12px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; border: 2px dashed var(--border);
+    font-size: 36px;
+  }
+  .qr-box p { font-size: 10px; color: rgba(92,51,23,.4); font-family: 'Be Vietnam Pro'; }
+  .bank-info { font-size: 13px; line-height: 1.8; color: var(--dark); }
+  .bank-info strong { color: var(--brown); }
+
+  /* ── SUBMIT ── */
+  .submit-wrap { margin-top: 32px; }
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--red), var(--orange));
+    color: #fff;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: .3px;
+    box-shadow: 0 4px 20px rgba(192,57,43,.35);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(192,57,43,.45);
+  }
+  .btn-submit:active { transform: translateY(0); }
+
+  /* ── SUCCESS ── */
+  .success-toast {
+    display: none;
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--brown); color: #fff;
+    padding: 14px 28px; border-radius: 40px;
+    font-size: 14px; font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0,0,0,.2);
+    z-index: 999; white-space: nowrap;
+    animation: slideUp .3s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .product-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .product-img-placeholder { height: 110px; font-size: 32px; }
+    .product-name { font-size: 12px; min-height: unset; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <!-- Thay src bằng ảnh banner thật của bạn, hoặc xoá thẻ img này -->
+  <!-- <img class="hero-img" src="banner.jpg" alt="Bánh tráng"> -->
+  <div class="hero-placeholder">
+    <span>🥢</span>
+    <p>Thay bằng ảnh banner thật — xoá div này khi có ảnh</p>
+  </div>
+  <div class="hero-content">
+    <h1>Bánh Tráng ✨</h1>
+    <p>Dẻo dai & Tôm giòn — Sốt ớt · Chanh dây · Mayonnaise</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══ BẢNG ORDER ══ -->
+  <div class="section-title">
+    <h2>🛒 Đặt hàng</h2>
+    <div class="line"></div>
+  </div>
+  <p style="font-size:13px;color:#888;margin-bottom:20px">Nhập số lượng (gói) vào ô bên dưới từng combo — để trống nếu không lấy</p>
+
+  <!-- 🫓 DẺO CHẤM -->
+  <div class="type-divider"><span>🫓 Bánh tráng dẻo — Chấm sốt</span></div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <!-- Thay src bằng ảnh thật: <img class="product-img" src="deo-cham-ot.jpg"> -->
+      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tráng dẻo<br>Chấm sốt</div>
+        <span class="product-sauce">🌶️ Ớt cay</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_cham_ot">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tráng dẻo<br>Chấm sốt</div>
+        <span class="product-sauce">🍋 Chanh dây</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_cham_chanh">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tráng dẻo<br>Chấm sốt</div>
+        <span class="product-sauce">🥚 Mayonnaise</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_cham_mayo">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dẻo chấm -->
+
+  <!-- 🫓 DẺO XÉ -->
+  <div class="type-divider"><span>🫓 Bánh tráng dẻo — Xé trộn sốt</span></div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tráng dẻo<br>Xé trộn sốt</div>
+        <span class="product-sauce">🌶️ Ớt cay</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_xe_ot">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tráng dẻo<br>Xé trộn sốt</div>
+        <span class="product-sauce">🍋 Chanh dây</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_xe_chanh">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tráng dẻo<br>Xé trộn sốt</div>
+        <span class="product-sauce">🥚 Mayonnaise</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="deo_xe_mayo">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dẻo xé -->
+
+  <!-- 🦐 TÔM CHẤM -->
+  <div class="type-divider"><span>🦐 Bánh tôm — Chấm sốt</span></div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tôm<br>Chấm sốt</div>
+        <span class="product-sauce">🌶️ Ớt cay</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_cham_ot">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tôm<br>Chấm sốt</div>
+        <span class="product-sauce">🍋 Chanh dây</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_cham_chanh">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tôm<br>Chấm sốt</div>
+        <span class="product-sauce">🥚 Mayonnaise</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_cham_mayo">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tôm chấm -->
+
+  <!-- 🦐 TÔM XÉ -->
+  <div class="type-divider"><span>🦐 Bánh tôm — Xé trộn sốt</span></div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🌶️<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tôm<br>Xé trộn sốt</div>
+        <span class="product-sauce">🌶️ Ớt cay</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_xe_ot">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🍋<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tôm<br>Xé trộn sốt</div>
+        <span class="product-sauce">🍋 Chanh dây</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_xe_chanh">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-placeholder">🥚<span class="label">Thêm ảnh tại đây</span></div>
+      <div class="product-info">
+        <div class="product-name">Bánh tôm<br>Xé trộn sốt</div>
+        <span class="product-sauce">🥚 Mayonnaise</span>
+        <div class="qty-row">
+          <span class="qty-label">Số gói</span>
+          <input class="qty-input" type="number" min="0" placeholder="0" name="tom_xe_mayo">
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tôm xé -->
+
+  <!-- ══ GHI CHÚ ══ -->
+  <div class="form-group" style="margin-top:28px">
+    <label>📝 Ghi chú thêm</label>
+    <textarea class="form-control" id="note" placeholder="Yêu cầu đặc biệt, giờ giao hàng mong muốn..."></textarea>
+  </div>
+
+  <!-- ══ THÔNG TIN NGƯỜI ĐẶT ══ -->
+  <div class="section-title">
+    <h2>📋 Thông tin người đặt</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="form-group">
+    <label>Họ và tên <span class="req">*</span></label>
+    <input class="form-control" id="name" type="text" placeholder="Nguyễn Văn A">
+  </div>
+
+  <div class="form-group">
+    <label>Số điện thoại <span class="req">*</span></label>
+    <input class="form-control" id="phone" type="tel" placeholder="09xx xxx xxx">
+  </div>
+
+  <div class="form-group">
+    <label>Phương thức nhận hàng <span class="req">*</span></label>
+    <div class="radio-group">
+      <input type="radio" name="delivery" id="d1" value="Giao tận nơi" class="radio-option" checked>
+      <label for="d1" class="radio-label">🚚 Giao tận nơi</label>
+      <input type="radio" name="delivery" id="d2" value="Tự đến lấy" class="radio-option">
+      <label for="d2" class="radio-label">🏪 Tự đến lấy</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Địa chỉ giao hàng</label>
+    <input class="form-control" id="address" type="text" placeholder="Để trống nếu tự đến lấy">
+  </div>
+
+  <!-- ══ THANH TOÁN ══ -->
+  <div class="section-title">
+    <h2>💳 Thanh toán</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="qr-section">
+    <!-- Thay bằng ảnh QR thật: <img src="qr.png" style="width:160px;border-radius:12px"> -->
+    <div class="qr-box">
+      📱
+      <p>Ảnh QR tại đây</p>
+    </div>
+    <div class="bank-info">
+      <!-- ✏️ Sửa thông tin ngân hàng của bạn vào đây -->
+      <strong>Ngân hàng:</strong> [Tên ngân hàng]<br>
+      <strong>Số TK:</strong> [Số tài khoản]<br>
+      <strong>Chủ TK:</strong> [Họ tên]<br>
+      <strong>MoMo / ZaloPay:</strong> [Số điện thoại]
+    </div>
+  </div>
+
+  <div class="form-group" style="margin-top:18px">
+    <label>Bạn sẽ thanh toán bằng <span class="req">*</span></label>
+    <div class="radio-group">
+      <input type="radio" name="payment" id="p1" value="Tiền mặt (COD)" class="radio-option" checked>
+      <label for="p1" class="radio-label">💵 Tiền mặt (COD)</label>
+      <input type="radio" name="payment" id="p2" value="Chuyển khoản" class="radio-option">
+      <label for="p2" class="radio-label">🏦 Chuyển khoản</label>
+      <input type="radio" name="payment" id="p3" value="MoMo" class="radio-option">
+      <label for="p3" class="radio-label">📱 MoMo</label>
+      <input type="radio" name="payment" id="p4" value="ZaloPay" class="radio-option">
+      <label for="p4" class="radio-label">📱 ZaloPay</label>
+    </div>
+  </div>
+
+  <!-- ══ GỬI ĐƠN ══ -->
+  <div class="submit-wrap">
+    <button class="btn-submit" onclick="submitOrder()">
+      🛒 Gửi đơn hàng
+    </button>
+  </div>
+
+</div><!-- /container -->
+
+<div class="success-toast" id="toast">✅ Đơn hàng đã gửi! Mình sẽ liên hệ sớm nhé 🥰</div>
+
+<script>
+  // ── Số điện thoại Zalo của bạn (để gửi đơn qua Zalo) ──
+  // Thay SỐ_ZALO bằng số điện thoại thật
+  var ZALO_PHONE = 'SỐ_ZALO';
+
+  var COMBOS = [
+    { name: 'Bánh dẻo chấm 🌶️ Ớt cay',       field: 'deo_cham_ot'    },
+    { name: 'Bánh dẻo chấm 🍋 Chanh dây',      field: 'deo_cham_chanh' },
+    { name: 'Bánh dẻo chấm 🥚 Mayonnaise',     field: 'deo_cham_mayo'  },
+    { name: 'Bánh dẻo xé 🌶️ Ớt cay',          field: 'deo_xe_ot'      },
+    { name: 'Bánh dẻo xé 🍋 Chanh dây',        field: 'deo_xe_chanh'   },
+    { name: 'Bánh dẻo xé 🥚 Mayonnaise',       field: 'deo_xe_mayo'    },
+    { name: 'Bánh tôm chấm 🌶️ Ớt cay',        field: 'tom_cham_ot'    },
+    { name: 'Bánh tôm chấm 🍋 Chanh dây',      field: 'tom_cham_chanh' },
+    { name: 'Bánh tôm chấm 🥚 Mayonnaise',     field: 'tom_cham_mayo'  },
+    { name: 'Bánh tôm xé 🌶️ Ớt cay',          field: 'tom_xe_ot'      },
+    { name: 'Bánh tôm xé 🍋 Chanh dây',        field: 'tom_xe_chanh'   },
+    { name: 'Bánh tôm xé 🥚 Mayonnaise',       field: 'tom_xe_mayo'    },
+  ];
+
+  function submitOrder() {
+    var name     = document.getElementById('name').value.trim();
+    var phone    = document.getElementById('phone').value.trim();
+    var delivery = document.querySelector('input[name="delivery"]:checked').value;
+    var address  = document.getElementById('address').value.trim();
+    var payment  = document.querySelector('input[name="payment"]:checked').value;
+    var note     = document.getElementById('note').value.trim();
+
+    if (!name || !phone) {
+      alert('Vui lòng điền Họ tên và Số điện thoại nhé! 🙏');
+      return;
+    }
+
+    // Gom các combo có số lượng > 0
+    var items = [];
+    COMBOS.forEach(function(c) {
+      var el  = document.querySelector('[name="' + c.field + '"]');
+      var qty = parseInt(el ? el.value : 0) || 0;
+      if (qty > 0) items.push(qty + ' gói ' + c.name);
+    });
+
+    if (items.length === 0) {
+      alert('Bạn chưa chọn sản phẩm nào! Nhập số lượng vào ít nhất 1 combo nhé 😊');
+      return;
+    }
+
+    // Tạo nội dung tin nhắn
+    var msg = '🥢 ĐƠN HÀNG BÁNH TRÁNG\n';
+    msg += '─────────────────\n';
+    items.forEach(function(i) { msg += '• ' + i + '\n'; });
+    msg += '─────────────────\n';
+    msg += '👤 ' + name + '\n';
+    msg += '📞 ' + phone + '\n';
+    msg += '🚚 ' + delivery;
+    if (address) msg += ' — ' + address;
+    msg += '\n💳 ' + payment;
+    if (note) msg += '\n📝 ' + note;
+
+    // Gửi qua Zalo (mở app Zalo)
+    var encoded = encodeURIComponent(msg);
+    window.open('https://zalo.me/' + ZALO_PHONE + '?message=' + encoded, '_blank');
+
+    // Hiện toast
+    var toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(function() { toast.style.display = 'none'; }, 4000);
+  }
+</script>
+</body>
+</html>
